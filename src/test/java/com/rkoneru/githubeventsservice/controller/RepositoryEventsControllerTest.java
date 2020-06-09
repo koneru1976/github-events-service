@@ -1,5 +1,7 @@
 package com.rkoneru.githubeventsservice.controller;
 
+import com.rkoneru.githubeventsservice.integration.FakeGithubClient;
+import com.rkoneru.githubeventsservice.integration.GithubClient;
 import com.rkoneru.githubeventsservice.model.Event;
 import com.rkoneru.githubeventsservice.service.RepositoryEventsService;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,7 +23,9 @@ class RepositoryEventsControllerTest {
 
     @BeforeEach
     void setUp() {
-        repositoryEventsController = new RepositoryEventsController(new RepositoryEventsService());
+        GithubClient githubClient = new FakeGithubClient();
+        RepositoryEventsService repositoryEventsService = new RepositoryEventsService(githubClient);
+        repositoryEventsController = new RepositoryEventsController(repositoryEventsService);
     }
 
     @Test
