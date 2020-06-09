@@ -15,14 +15,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @AutoConfigureMockMvc
 @SpringBootTest(classes = GithubEventsServiceApplication.class)
-public class EventsControllerIT {
+public class RepositoryEventsControllerIT {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
     void shouldReturnHttpResponseWith200StatusCode() throws Exception {
-        RequestBuilder rb = MockMvcRequestBuilders.get("/repos/events");
+        RequestBuilder rb = MockMvcRequestBuilders.get("/repositories/test/events?owner=John&event-type=ForkEvent");
 
         MvcResult mvcResult = mockMvc.perform(rb).andReturn();
 
