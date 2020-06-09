@@ -1,6 +1,7 @@
 package com.rkoneru.githubeventsservice.controller;
 
 import com.rkoneru.githubeventsservice.model.Event;
+import com.rkoneru.githubeventsservice.service.RepositoryEventsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ class RepositoryEventsControllerTest {
 
     @BeforeEach
     void setUp() {
-        repositoryEventsController = new RepositoryEventsController();
+        repositoryEventsController = new RepositoryEventsController(new RepositoryEventsService());
     }
 
     @Test

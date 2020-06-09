@@ -1,20 +1,25 @@
 package com.rkoneru.githubeventsservice.controller;
 
-import com.rkoneru.githubeventsservice.model.Event;
+import com.rkoneru.githubeventsservice.service.RepositoryEventsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDateTime;
-import java.util.Arrays;
 
 @RequestMapping("/repositories/{repository}/events")
 @RestController
 public class RepositoryEventsController {
 
+    private final RepositoryEventsService repositoryEventsService;
+
+    @Autowired
+    public RepositoryEventsController(RepositoryEventsService repositoryEventsService) {
+        this.repositoryEventsService = repositoryEventsService;
+    }
+
     @GetMapping
     public ResponseEntity getEvents(@PathVariable("repository") String repository,
                                     @RequestParam("owner") String owner,
                                     @RequestParam("event-type") String eventType) {
-        return ResponseEntity.ok(Arrays.asList(new Event(eventType, LocalDateTime.of(2020, 1, 31, 6, 15, 32))));
+        return ResponseEntity.ok(repositoryEventsService.getEvents(repository, owner, eventType));
     }
 }
