@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.3.0.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
+	id 'idea'
 }
 
 group = 'com.rkoneru'
@@ -22,3 +23,44 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
+sourceSets {
+	itest {
+		java {
+			compileClasspath += test.compileClasspath
+			runtimeClasspath += test.runtimeClasspath
+			srcDir 'src/itest/java'
+		}
+		resources {
+			srcDir 'src/itest/resources'
+		}
+	}
+}
+
+
+
+configurations {
+	itesCompile.extendsFrom testCompile
+	itestRuntime.extendsFrom testRuntime
+}
+
+idea {
+	module {
+		testSourceDirs += file('src/itest/java')
+		testResourceDirs += file('src/itest/resources')
+
+		scopes.TEST.plus += [configurations.itestCompile]
+	}
+}
+
+task integrationTest(type: Test) {
+	testClassesDirs = sourceSets.itest.output.classesDirs
+	classpath = sourceSets.itest.runtimeClasspath
+}
+
+integrationTest {
+	useJUnitPlatform()
+}
+
+check.dependsOn integrationTest
+integrationTest.mustRunAfter test
