@@ -11,7 +11,6 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @AutoConfigureMockMvc
 @SpringBootTest(classes = GithubEventsServiceApplication.class)
@@ -19,6 +18,8 @@ public class RepositoryEventsControllerIT {
 
     @Autowired
     private MockMvc mockMvc;
+
+    //TODO Use wiremock for integration testing.
 
     @Test
     void shouldReturnHttpResponseWith200StatusCode() throws Exception {
