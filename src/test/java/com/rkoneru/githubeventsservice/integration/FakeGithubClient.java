@@ -2,6 +2,7 @@ package com.rkoneru.githubeventsservice.integration;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class FakeGithubClient implements GithubClient {
@@ -11,8 +12,9 @@ public class FakeGithubClient implements GithubClient {
     @Override
     public List<GithubRepositoryEvent> getRepositoryEventsByOwnerAndRepo(String owner, String repo) {
         if ("john".equalsIgnoreCase(owner) && "test".equalsIgnoreCase(repo)) {
-            return Arrays.asList(new GithubRepositoryEvent("ForkEvent", JAN_31_2020_06_15_32));
+            GithubRepositoryEventActor actor = new GithubRepositoryEventActor(123L, "johngit", "", "", "url", "avatarUrl");
+            return Arrays.asList(new GithubRepositoryEvent("ForkEvent", actor, JAN_31_2020_06_15_32));
         }
-        return null;
+        return Collections.emptyList();
     }
 }

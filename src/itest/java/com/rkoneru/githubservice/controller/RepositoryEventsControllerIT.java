@@ -22,7 +22,7 @@ public class RepositoryEventsControllerIT {
 
     @Test
     void shouldReturnHttpResponseWith200StatusCode() throws Exception {
-        RequestBuilder rb = MockMvcRequestBuilders.get("/repositories/test/events?owner=John&event-type=ForkEvent");
+        RequestBuilder rb = MockMvcRequestBuilders.get("/repositories/hellogitworld/events?owner=githubtraining&event-type=ForkEvent");
 
         MvcResult mvcResult = mockMvc.perform(rb).andReturn();
 
