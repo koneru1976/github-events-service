@@ -60,4 +60,45 @@ class RepositoryEventsServiceTest {
 
         assertEquals(JAN_31_2020_06_15_32, events.get(0).getTimestamp());
     }
+
+    @Test
+    void shouldReturnActorsId() {
+        List<Event> events = repositoryEventsService.getEvents("test", "john", "ForkEvent");
+
+        assertEquals(123L, events.get(0).getActor().getId());
+    }
+
+    @Test
+    void shouldReturnActorsLogin() {
+        List<Event> events = repositoryEventsService.getEvents("test", "john", "ForkEvent");
+
+        assertEquals("johngit", events.get(0).getActor().getLogin());
+    }
+
+    @Test
+    void shouldReturnActorsDisplayLogin() {
+        List<Event> events = repositoryEventsService.getEvents("test", "john", "ForkEvent");
+
+        assertEquals("dlogin", events.get(0).getActor().getDisplayLogin());
+    }
+
+    @Test
+    void shouldReturnActorsGravatarId() {
+        List<Event> events = repositoryEventsService.getEvents("test", "john", "ForkEvent");
+
+        assertEquals("gravid", events.get(0).getActor().getGravatarId());
+    }
+
+    @Test
+    void shouldReturnActorsUrl() {
+        List<Event> events = repositoryEventsService.getEvents("test", "john", "ForkEvent");
+
+        assertEquals("url", events.get(0).getActor().getUrl());
+    }
+    @Test
+    void shouldReturnActorsAvatarUrl() {
+        List<Event> events = repositoryEventsService.getEvents("test", "john", "ForkEvent");
+
+        assertEquals("avatarUrl", events.get(0).getActor().getAvatarUrl());
+    }
 }

@@ -12,7 +12,7 @@ public class FakeGithubClient implements GithubClient {
     @Override
     public List<GithubRepositoryEvent> getRepositoryEventsByOwnerAndRepo(String owner, String repo) {
         if ("john".equalsIgnoreCase(owner) && "test".equalsIgnoreCase(repo)) {
-            GithubRepositoryEventActor actor = new GithubRepositoryEventActor(123L, "johngit", "", "", "url", "avatarUrl");
+            GithubRepositoryEventActor actor = new GithubRepositoryEventActor(123L, "johngit", "dlogin", "gravid", "url", "avatarUrl");
             return Arrays.asList(new GithubRepositoryEvent("ForkEvent", actor, JAN_31_2020_06_15_32));
         }
         return Collections.emptyList();
